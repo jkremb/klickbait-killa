@@ -1,0 +1,51 @@
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#ffffff, #1b1b1f);
+  --fg: light-dark(#111827, #f3f4f6);
+  --muted: light-dark(#4b5563, #a1a1aa);
+  --line: light-dark(#d1d5db, #3f3f46);
+  --soft: light-dark(#f3f4f6, #27272a);
+  --accent: #facc15;
+  --bad: light-dark(#b91c1c, #f87171);
+  --good: light-dark(#15803d, #4ade80);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 system-ui, sans-serif; }
+main { max-width: 640px; margin: 0 auto; padding: 32px 20px 64px; }
+h1 { margin: 0 0 4px; font-size: 26px; }
+h2 { margin: 28px 0 8px; font-size: 18px; }
+p { margin: 8px 0; }
+a { color: inherit; }
+.muted { color: var(--muted); }
+.error { color: var(--bad); }
+.success { color: var(--good); }
+label { display: block; margin: 12px 0 4px; font-weight: 600; }
+label.check { display: flex; gap: 8px; align-items: start; font-weight: 400; }
+input[type="text"], input[type="password"], input[type="number"], select, textarea {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--bg); color: var(--fg); font: inherit;
+}
+textarea { min-height: 72px; resize: vertical; }
+button {
+  padding: 8px 16px; border: 1px solid var(--line); border-radius: 18px;
+  background: var(--soft); color: var(--fg); font: inherit; cursor: pointer;
+}
+button.primary { background: var(--accent); border-color: transparent; color: #1f2937; font-weight: 600; }
+button.danger { color: var(--bad); }
+button:disabled { opacity: 0.55; cursor: default; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 14px; }
+.step[hidden] { display: none; }
+.choice {
+  display: block; margin: 8px 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+  font-weight: 400;
+}
+.choice input { margin-right: 8px; }
+.preview { margin: 14px 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; }
+.notice { padding: 10px 12px; background: var(--soft); border-radius: 10px; }
+section + section { margin-top: 8px; border-top: 1px solid var(--line); }
+
+body.frame { background: transparent; }
+body.frame main { padding: 2px; }
+body.frame h1 { font-size: 15px; }
+body.frame p, body.frame label, body.frame input, body.frame button { font-size: 13px; }

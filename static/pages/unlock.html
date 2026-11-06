@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Unlock Klickbait Killa</title>
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+  <main>
+    <form id="form">
+      <h1>Unlock Klickbait Killa</h1>
+      <label for="passphrase">Passphrase</label>
+      <input id="passphrase" type="password" autocomplete="current-password" autofocus required>
+      <p id="message" role="alert" class="error"></p>
+      <div class="row">
+        <button class="primary" id="submit" type="submit">Unlock</button>
+        <a id="forgot" href="#">Forgot passphrase?</a>
+      </div>
+    </form>
+    <p id="done" class="success" hidden>Unlocked until you close Firefox.</p>
+  </main>
+  <script src="unlock.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "klickbait-killa",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Firefox addon that summarizes YouTube videos from their transcripts using your own AI API key.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint:ext": "web-ext lint --source-dir dist",
+    "start": "web-ext run --source-dir dist --start-url https://www.youtube.com",
+    "package": "npm run build && web-ext build --source-dir dist --artifacts-dir artifacts --overwrite-dest",
+    "check": "npm run typecheck && npm test && npm run build && npm run lint:ext"
+  },
+  "devDependencies": {
+    "@types/firefox-webext-browser": "^143.0.0",
+    "esbuild": "^0.27.0",
+    "happy-dom": "^20.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.0.0",
+    "web-ext": "^10.0.0"
+  }
+}

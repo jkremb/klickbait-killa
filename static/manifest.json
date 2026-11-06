@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Klickbait Killa",
+  "version": "0.1.0",
+  "description": "Decide what's worth watching on YouTube. Get a quick AI summary from a video's transcript, using your own API key.",
+  "icons": { "48": "icon.svg", "96": "icon.svg" },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "klickbait-killa@klickbait-killa.invalid",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": { "required": ["websiteContent"] }
+    }
+  },
+  "background": { "scripts": ["background.js"] },
+  "action": { "default_title": "Klickbait Killa settings", "default_icon": "icon.svg" },
+  "options_ui": { "page": "pages/options.html", "open_in_tab": true },
+  "permissions": ["storage"],
+  "host_permissions": ["https://www.youtube.com/*"],
+  "optional_host_permissions": [
+    "https://api.anthropic.com/*",
+    "https://api.openai.com/*",
+    "https://generativelanguage.googleapis.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["pages/unlock.html", "pages/unlock.js", "pages/pages.css"],
+      "matches": ["https://www.youtube.com/*"]
+    }
+  ]
+}

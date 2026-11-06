@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Set up Klickbait Killa</title>
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+  <main>
+    <h1>Klickbait Killa</h1>
+    <p class="muted" id="progress" aria-live="polite"></p>
+
+    <div class="step" data-step="intro">
+      <h2>Decide what's worth watching</h2>
+      <p>Click Summarize on a YouTube video or thumbnail to see what it actually says, based on its transcript.</p>
+      <div class="preview" aria-label="Example summary format">
+        <strong>Title overstates</strong>
+        <p>The video does cover the topic, but its promised result only applies in one narrow situation.</p>
+        <ul>
+          <li>[03:12] A key point from the video</li>
+          <li>[17:45] Another key point</li>
+        </ul>
+        <p><strong>Worth watching?</strong> Only if you need the details.</p>
+      </div>
+      <p>You'll use your own AI provider account, and you pay that provider directly for what you use.</p>
+    </div>
+
+    <div class="step" data-step="provider">
+      <h2>Choose an AI provider</h2>
+      <div id="providers"></div>
+      <p class="muted">Next, Firefox will ask for permission to contact the provider you chose.</p>
+      <p id="provider-message" class="error" role="alert"></p>
+    </div>
+
+    <div class="step" data-step="key">
+      <h2>Add your API key</h2>
+      <p><a id="key-link" target="_blank" rel="noopener">Create a key with your provider</a>, then paste it here.</p>
+      <label for="key">API key</label>
+      <input id="key" type="password" autocomplete="off" spellcheck="false">
+      <p class="muted">Testing sends one tiny request, which your provider may charge a fraction of a cent for.</p>
+      <div class="row"><button id="test-key" type="button">Test key</button></div>
+      <p id="key-message" role="status"></p>
+    </div>
+
+    <div class="step" data-step="consent">
+      <h2>What gets shared</h2>
+      <p>Each time you click Summarize, the video's title, channel, duration and transcript are sent to <strong class="provider-name"></strong> using your key. The addon doesn't run any servers and has no analytics.</p>
+      <p class="notice" id="provider-data-note"></p>
+      <p>The addon gets transcripts from YouTube through your normal browser session, including your YouTube login if you have one. It does this only after you click Summarize.</p>
+      <p>Summaries are stored unencrypted in Firefox on this device, so the list of summarized videos could be seen by someone with access to your Firefox profile. You can clear them anytime in settings.</p>
+      <label class="check"><input id="consent" type="checkbox"> <span>I understand and agree to send this data when I click Summarize.</span></label>
+    </div>
+
+    <div class="step" data-step="passphrase">
+      <h2>Protect your key</h2>
+      <p>Your API key is encrypted with this passphrase. You'll enter it once per Firefox session, the first time a summary needs it.</p>
+      <label for="pass1">Passphrase (at least 8 characters)</label>
+      <input id="pass1" type="password" autocomplete="new-password">
+      <label for="pass2">Repeat passphrase</label>
+      <input id="pass2" type="password" autocomplete="new-password">
+      <p class="notice"><strong>It can't be recovered.</strong> If you forget it, the only option is a full reset, which deletes your keys, settings and saved summaries.</p>
+      <p id="pass-message" class="error" role="alert"></p>
+    </div>
+
+    <div class="step" data-step="done">
+      <h2>You're set</h2>
+      <p>On YouTube, hover over a thumbnail or open a video and click <strong>Summarize</strong>.</p>
+      <p class="notice"><strong>Recommended:</strong> set a spending limit with your provider. It limits the damage if your key is ever exposed.</p>
+      <p><a href="https://www.youtube.com/">Go to YouTube</a></p>
+    </div>
+
+    <div class="row">
+      <button id="back" type="button">Back</button>
+      <button id="next" class="primary" type="button">Continue</button>
+    </div>
+  </main>
+  <script src="welcome.js"></script>
+</body>
+</html>
