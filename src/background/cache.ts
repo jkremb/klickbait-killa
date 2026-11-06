@@ -1,4 +1,5 @@
 import { MAX_CACHE_ENTRIES } from "../shared/config";
+import { PROMPT_VERSION } from "./prompt";
 
 export interface CacheIdentity {
   videoId: string;
@@ -23,11 +24,11 @@ export type CacheMap = Record<string, CacheEntry>;
 const DAY_MS = 86_400_000;
 
 /** Changing any part of the identity produces a separate summary. */
-export async function cacheKey(identity: CacheIdentity): Promise<string> {
+export async function cacheKey(identity: CacheIdentity, promptVersion = PROMPT_VERSION): Promise<string> {
   const { videoId, provider, model, language, detail, customInstructions } = identity;
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(customInstructions));
   const hash = Array.from(new Uint8Array(digest).slice(0, 8), (b) => b.toString(16).padStart(2, "0")).join("");
-  return [videoId, provider, model, language, detail, hash].join("|");
+  return [`v${promptVersion}`, videoId, provider, model, language, detail, hash].join("|");
 }
 
 export function isExpired(entry: CacheEntry, cacheDays: number, now: number): boolean {

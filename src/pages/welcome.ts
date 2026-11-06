@@ -8,7 +8,7 @@ const STEPS = ["intro", "provider", "key", "consent", "passphrase", "done"] as c
 type Step = (typeof STEPS)[number];
 
 let index = 0;
-let provider: ProviderId = "anthropic";
+let provider: ProviderId = "gemini";
 let keyTested = false;
 
 const steps = Array.from(document.querySelectorAll<HTMLElement>(".step"));
@@ -59,7 +59,14 @@ function renderProviders(): void {
     const note = document.createElement("div");
     note.className = "muted";
     note.textContent = `${info.summary} Default model: ${model?.label ?? DEFAULT_SETTINGS.models[id]}.`;
-    label.append(input, name, note);
+    label.append(input, name);
+    if (info.recommended) {
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = "Recommended";
+      label.append(tag);
+    }
+    label.append(note);
     box.append(label);
   }
 }

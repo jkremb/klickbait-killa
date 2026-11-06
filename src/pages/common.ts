@@ -24,9 +24,19 @@ export interface ProviderInfo {
   keyUrl: string;
   summary: string;
   dataNote: string;
+  recommended?: boolean;
 }
 
 export const PROVIDER_INFO: Record<ProviderId, ProviderInfo> = {
+  gemini: {
+    name: "Google Gemini",
+    origin: "https://generativelanguage.googleapis.com/*",
+    keyUrl: "https://aistudio.google.com/apikey",
+    summary: "Has a free tier, with limits.",
+    dataNote:
+      "Outside the EEA, Switzerland and the UK, Google says it may use content sent on Gemini's free tier to improve its products. On the paid tier, and on free use in those regions, it says it doesn't.",
+    recommended: true,
+  },
   anthropic: {
     name: "Anthropic (Claude)",
     origin: "https://api.anthropic.com/*",
@@ -40,13 +50,6 @@ export const PROVIDER_INFO: Record<ProviderId, ProviderInfo> = {
     keyUrl: "https://platform.openai.com/api-keys",
     summary: "Requires a paid API account.",
     dataNote: "OpenAI handles what you send under its API terms. Review them to see how long data is kept and how it's used.",
-  },
-  gemini: {
-    name: "Google Gemini",
-    origin: "https://generativelanguage.googleapis.com/*",
-    keyUrl: "https://aistudio.google.com/apikey",
-    summary: "Has a free tier, with limits. Google may use free-tier content to improve its products.",
-    dataNote: "On Gemini's free tier, Google says it may use your content to improve its products. On the paid tier, it says it doesn't.",
   },
 };
 

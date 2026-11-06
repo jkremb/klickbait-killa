@@ -41,6 +41,7 @@ button:disabled { opacity: 0.55; cursor: default; }
   font-weight: 400;
 }
 .choice input { margin-right: 8px; }
+.tag { margin-left: 8px; padding: 1px 8px; border-radius: 10px; background: var(--accent); color: #1f2937; font-size: 12px; font-weight: 600; }
 .preview { margin: 14px 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; }
 .notice { padding: 10px 12px; background: var(--soft); border-radius: 10px; }
 section + section { margin-top: 8px; border-top: 1px solid var(--line); }

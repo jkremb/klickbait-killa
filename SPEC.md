@@ -261,15 +261,27 @@ Costs always read as estimates. The transcript is never silently truncated.
 ### Output
 
 ```
-Verdict: <Title matches | Title overstates | Title doesn't match>
-<One or two sentences that directly answer what the title promises.>
+Verdict: <Watch it | Watch parts | Skip it>
+<One or two sentences: what the title promises, and the actual answer or payoff.>
 
 Key points
 - [03:12] ...
 - [17:45] ...
 
-Worth watching? <one line>
+Worth watching? <score>/10: <What the viewer would gain by watching, or what would waste their time>
 ```
+
+**The verdict answers "does this deserve my time?"**, not "is the title accurate?". It rates whether the viewer is likely to come away smarter, more knowledgeable or more entertained, and whether that's worth the runtime. No verdict is the default and there's no quota.
+
+**Score:** a whole number from 0 to 10, shown only in the "Worth watching?" line. 10 means "you absolutely have to watch this", 5 means "you might enjoy parts of it", and 0 means "garbage and a waste of time". A competent video with nothing remarkable scores about 5. The score sets the verdict:
+
+- **Watch it (7 to 10):** the video has real value or is enjoyable, and earns its length.
+- **Watch parts (4 to 6):** some sections, given with timestamps, are worth it, but much of the rest isn't.
+- **Skip it (0 to 3):** the video is mostly padding, generic content presented as special, or unreliable claims, or it doesn't deliver what the title promises.
+- The AI judges entertainment from the humor, storytelling and personality in the transcript, and notes when the appeal may be visual.
+- It reports what the video says from the transcript only, but may use general knowledge to assess the main claims. It flags only claims it's confident about, and names the claim and the reason.
+- The verdict assesses the video and its claims only, never the creator's honesty, motives or character.
+- `PROMPT_VERSION` is part of the cache key, so changing the prompt's meaning replaces old summaries.
 
 **Detail levels**
 
@@ -281,8 +293,8 @@ Worth watching? <one line>
 
 - **System prompt** (fixed):
   - Sets the format and detail level, and requires the summary language.
-  - Answers the title's promise first, using only the transcript.
-  - Rates the title, never the creator.
+  - Answers the title's promise first, reporting the video's content from the transcript only.
+  - Rates the video and its claims, never the creator.
   - Limits direct quotes to short phrases and doesn't reproduce the video section by section.
   - Says when the transcript doesn't answer the title rather than guessing.
   - Uses only timestamps from the transcript.
@@ -331,11 +343,11 @@ Worth watching? <one line>
 Opens on install. Steps can resume if closed.
 
 1. **What it does:** one sentence and a preview of a summary.
-2. **Provider:** choice with cost notes, and a link to create a key. Grants that provider's host permission here.
+2. **Provider:** choice with cost notes, and a link to create a key. Gemini is listed first, preselected and marked Recommended because of its free tier. Grants that provider's host permission here.
 3. **API key:** paste, test with a minimal request, then show a clear result before moving on.
-4. **Privacy consent:** "Each time you click summarize, the video's title, channel, duration and transcript are sent to <provider> using your key." Shows that provider's data-use note, including that free tiers may use content to improve products, and that YouTube requests run under the user's YouTube session. Must be accepted to finish.
+4. **Privacy consent:** "Each time you click summarize, the video's title, channel, duration and transcript are sent to <provider> using your key." Shows that provider's data-use note, including how free-tier content may be used in different regions, and that YouTube requests run under the user's YouTube session. Must be accepted to finish.
 5. **Passphrase:** set and confirm, with the warning that it can't be recovered and that forgetting it resets the addon.
-6. **Done:** recommend a provider spending limit; link to YouTube.
+6. **Done:** recommend a spending limit for paid accounts; link to YouTube.
 
 Clicking a summarize button before setup is finished reopens the wizard.
 

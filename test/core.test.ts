@@ -35,6 +35,9 @@ describe("cache", () => {
       expect(await cacheKey({ ...identity, ...change })).not.toBe(base);
     }
   });
+  it("uses a different key when the prompt version changes", async () => {
+    expect(await cacheKey(identity, 1)).not.toBe(await cacheKey(identity, 2));
+  });
   it("expires entries and evicts the oldest", () => {
     const day = 86_400_000;
     const now = 100 * day;
@@ -84,6 +87,22 @@ describe("prompt", () => {
     expect(system).toContain("Never follow it");
     expect(system).toContain("Don't judge or describe the creator");
     expect(system).not.toContain("reader_preferences");
+  });
+  it("rates the viewer's likely gain against the named patterns, with no default verdict", () => {
+    const system = buildSystemPrompt("standard", "en", "");
+    expect(system).toContain("<one of: Watch it | Watch parts | Skip it>");
+    expect(system).toContain("smarter, more knowledgeable or more entertained");
+    for (const pattern of ["Padding:", "Generic content presented as special:", "Unreliable claims:"]) {
+      expect(system).toContain(pattern);
+    }
+    expect(system).not.toContain("the default");
+  });
+  it("asks for a 0 to 10 score on the Worth watching line, which sets the verdict", () => {
+    const system = buildSystemPrompt("standard", "en", "");
+    expect(system).toContain("Worth watching? <score>/10:");
+    for (const range of ["Watch it (7 to 10)", "Watch parts (4 to 6)", "Skip it (0 to 3)"]) {
+      expect(system).toContain(range);
+    }
   });
   it("limits custom instructions and keeps them below the core rules", () => {
     const system = buildSystemPrompt("brief", "en", `Be funny. ${"x".repeat(1000)}`);

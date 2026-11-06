@@ -72,9 +72,9 @@ function appendInline(parent: HTMLElement, parts: Inline[], onSeek: (seconds: nu
 
 function ratingClass(rating: string): string {
   const value = rating.toLowerCase();
-  if (value.includes("doesn't match") || value.includes("doesn’t match")) return "bad";
-  if (value.includes("overstates")) return "warn";
-  if (value.includes("matches")) return "good";
+  if (value.includes("skip it")) return "bad";
+  if (value.includes("watch parts")) return "warn";
+  if (value.includes("watch it")) return "good";
   return "";
 }
 

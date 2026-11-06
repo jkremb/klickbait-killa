@@ -2,14 +2,14 @@
 import { describe, expect, it, vi } from "vitest";
 import { parseInline, parseSummary, renderSummary } from "../src/content/render";
 
-const SUMMARY = `Verdict: Title overstates
+const SUMMARY = `Verdict: Watch parts
 It only works in one case.
 
 Key points
 - [03:12] First point
 - [1:02:03] Second point
 
-Worth watching? Probably not.`;
+Worth watching? 5/10: Probably not.`;
 
 describe("parseInline", () => {
   it("makes valid timestamps clickable and leaves invalid ones as text", () => {
@@ -28,7 +28,7 @@ describe("parseSummary", () => {
     expect(parseSummary(SUMMARY, 4000).map((b) => b.kind)).toEqual(["verdict", "para", "heading", "point", "point", "worth"]);
   });
   it("tolerates partial text and stray markdown while streaming", () => {
-    expect(parseSummary("**Verdict:** Title matches\n## Key points\n- [0:0", 100).map((b) => b.kind)).toEqual(["verdict", "heading", "point"]);
+    expect(parseSummary("**Verdict:** Skip it\n## Key points\n- [0:0", 100).map((b) => b.kind)).toEqual(["verdict", "heading", "point"]);
     expect(parseSummary("", 100)).toEqual([]);
   });
 });
@@ -43,6 +43,22 @@ describe("renderSummary", () => {
     expect(container.querySelector(".verdict")?.className).toContain("warn");
     (container.querySelector("button.time") as HTMLButtonElement).click();
     expect(onSeek).toHaveBeenCalledWith(192);
+  });
+
+  it("shows the score with the Worth watching line", () => {
+    const container = document.createElement("div");
+    renderSummary(container, parseSummary(SUMMARY, 4000), vi.fn());
+    expect(container.querySelector(".worth")?.textContent).toBe("Worth watching? 5/10: Probably not.");
+  });
+
+  it.each([
+    ["Watch it", "good"],
+    ["Watch parts", "warn"],
+    ["Skip it", "bad"],
+  ])("colors the %s verdict as %s", (rating, className) => {
+    const container = document.createElement("div");
+    renderSummary(container, parseSummary(`Verdict: ${rating}`, 100), vi.fn());
+    expect(container.querySelector(".verdict")?.classList.contains(className)).toBe(true);
   });
 
   it("never turns model output into HTML, links or images", () => {

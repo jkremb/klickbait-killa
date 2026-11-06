@@ -1,6 +1,6 @@
 # Klickbait Killa
 
-A Firefox addon that helps you decide what's worth watching on YouTube. Click **Summarize** on a video or thumbnail to get a short AI summary of its transcript, using your own Anthropic, OpenAI or Gemini API key.
+A Firefox addon that helps you decide what's worth watching on YouTube. Click **Summarize** on a video or thumbnail to get a short AI summary of its transcript and an honest verdict on whether it deserves your time. It uses your own API key from Gemini (recommended, with a free tier), Anthropic or OpenAI.
 
 See [SPEC.md](SPEC.md) for the full design and [PRIVACY.md](PRIVACY.md) for what data goes where.
 
