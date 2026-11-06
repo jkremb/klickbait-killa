@@ -427,7 +427,7 @@ Tested on 2026-11-05 in Firefox 159 against live YouTube, logged out, with a loc
 | Caption access and feed fetch | Confirmed logged out (section 4). **Logged-in behavior not tested** |
 | Background lifetime during long streams | Confirmed with the view closed and the tab open, through a 75-second pause. Closing the tab mid-stream isn't tested end to end |
 | Unlock frame inside YouTube's page | Confirmed. A popup window is also offered |
-| Real provider APIs | **Not tested with real keys.** Request and stream formats are written from provider documentation and tested against mocks |
+| Real provider APIs | Gemini confirmed with a real key. **Anthropic and OpenAI not tested with real keys:** their request and stream formats are written from provider documentation and tested against mocks |
 | Page-panel fallback route | **Not tested live.** The panel request succeeded every time, so this route never ran |
 | Firefox versions | Minimum 140: built-in data consent requires it |
 | Data-collection manifest format | Confirmed: `websiteContent` under `required` |
