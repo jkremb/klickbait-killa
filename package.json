@@ -19,7 +19,7 @@
   "devDependencies": {
     "@types/firefox-webext-browser": "^143.0.0",
     "esbuild": "^0.27.0",
-    "happy-dom": "^20.0.0",
+    "happy-dom": "^21.0.4",
     "typescript": "^5.9.0",
     "vitest": "^4.0.0",
     "web-ext": "^10.0.0"
