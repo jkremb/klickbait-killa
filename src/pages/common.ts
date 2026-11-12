@@ -24,7 +24,8 @@ export interface ProviderInfo {
   keyUrl: string;
   summary: string;
   dataNote: string;
-  recommended?: boolean;
+  /** Request and stream formats are tested only against mocks, not the real API. */
+  experimental?: boolean;
 }
 
 export const PROVIDER_INFO: Record<ProviderId, ProviderInfo> = {
@@ -32,24 +33,25 @@ export const PROVIDER_INFO: Record<ProviderId, ProviderInfo> = {
     name: "Google Gemini",
     origin: "https://generativelanguage.googleapis.com/*",
     keyUrl: "https://aistudio.google.com/apikey",
-    summary: "Has a free tier, with limits.",
+    summary: "Low cost. Google offers a free tier in some regions; see Google's terms.",
     dataNote:
       "Outside the EEA, Switzerland and the UK, Google says it may use content sent on Gemini's free tier to improve its products. On the paid tier, and on free use in those regions, it says it doesn't.",
-    recommended: true,
   },
   anthropic: {
     name: "Anthropic (Claude)",
     origin: "https://api.anthropic.com/*",
     keyUrl: "https://platform.claude.com/settings/keys",
-    summary: "Requires a paid API account.",
+    summary: "Experimental: not yet tested with a real Anthropic account. Requires a paid API account.",
     dataNote: "Anthropic handles what you send under its API terms. Review them to see how long data is kept and how it's used.",
+    experimental: true,
   },
   openai: {
     name: "OpenAI (GPT)",
     origin: "https://api.openai.com/*",
     keyUrl: "https://platform.openai.com/api-keys",
-    summary: "Requires a paid API account.",
+    summary: "Experimental: not yet tested with a real OpenAI account. Requires a paid API account.",
     dataNote: "OpenAI handles what you send under its API terms. Review them to see how long data is kept and how it's used.",
+    experimental: true,
   },
 };
 

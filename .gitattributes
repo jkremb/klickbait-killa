@@ -1,0 +1,3 @@
+# LF everywhere so dist/ builds byte-identically on any OS (AMO reviewers rebuild it).
+* text=auto eol=lf
+*.png binary

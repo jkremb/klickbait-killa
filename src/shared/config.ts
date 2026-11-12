@@ -1,5 +1,5 @@
 /** Set these before publishing. A blank value hides the matching link. */
-export const ISSUES_URL = "";
+export const ISSUES_URL = "https://github.com/jkremb/klickbait-killa/issues";
 export const DONATE_URL = "";
 
 export const MAX_CONCURRENT_JOBS = 3;

@@ -59,14 +59,7 @@ function renderProviders(): void {
     const note = document.createElement("div");
     note.className = "muted";
     note.textContent = `${info.summary} Default model: ${model?.label ?? DEFAULT_SETTINGS.models[id]}.`;
-    label.append(input, name);
-    if (info.recommended) {
-      const tag = document.createElement("span");
-      tag.className = "tag";
-      tag.textContent = "Recommended";
-      label.append(tag);
-    }
-    label.append(note);
+    label.append(input, name, note);
     box.append(label);
   }
 }

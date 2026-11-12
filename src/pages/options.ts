@@ -192,7 +192,7 @@ function renderAbout(): void {
 
 async function start(): Promise<void> {
   settings = await loadSettings();
-  providerSelect.append(...PROVIDER_IDS.map((id) => option(id, PROVIDER_INFO[id].name)));
+  providerSelect.append(...PROVIDER_IDS.map((id) => option(id, `${PROVIDER_INFO[id].name}${PROVIDER_INFO[id].experimental ? " (experimental)" : ""}`)));
   const names = new Intl.DisplayNames(["en"], { type: "language" });
   language.append(option("auto", "Same as Firefox"), ...LANGUAGES.map((code) => option(code, names.of(code) ?? code)));
   fill();

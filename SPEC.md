@@ -11,7 +11,7 @@ Let someone find out whether a YouTube video is worth watching, and what it actu
 
 ### Audience and release
 
-- Public release on addons.mozilla.org (AMO), free, with a donation link.
+- Public release on addons.mozilla.org (AMO), free and non-commercial. No donation link for now (see section 12).
 - Maintained by one person as a side project, so low maintenance outweighs extra features.
 
 ### Non-goals for v1
@@ -54,7 +54,7 @@ Let someone find out whether a YouTube video is worth watching, and what it actu
 | Live and replays | Replays work if captions exist; live and upcoming show "not available yet" |
 | Customization | Detail level plus free-text instructions; core prompt fixed |
 | Concurrency | Up to 3 at once; jobs finish in the background; Stop cancels |
-| Donation | Quiet link in settings and store listing only |
+| Donation | None for now; if added later, a quiet link in settings and store listing only |
 | Privacy | Explicit consent in setup; no telemetry |
 
 ### Defaults chosen during spec writing
@@ -343,7 +343,7 @@ Worth watching? <score>/10: <What the viewer would gain by watching, or what wou
 Opens on install. Steps can resume if closed.
 
 1. **What it does:** one sentence and a preview of a summary.
-2. **Provider:** choice with cost notes, and a link to create a key. Gemini is listed first, preselected and marked Recommended because of its free tier. Grants that provider's host permission here.
+2. **Provider:** choice with cost notes, and a link to create a key. Gemini is listed first and preselected because it's the provider verified against the real API (section 14). It isn't marked Recommended and the free tier isn't promoted: Google's terms allow only paid services when making API clients available to users in the EEA, Switzerland or the UK. Grants that provider's host permission here.
 3. **API key:** paste, test with a minimal request, then show a clear result before moving on.
 4. **Privacy consent:** "Each time you click summarize, the video's title, channel, duration and transcript are sent to <provider> using your key." Shows that provider's data-use note, including how free-tier content may be used in different regions, and that YouTube requests run under the user's YouTube session. Must be accepted to finish.
 5. **Passphrase:** set and confirm, with the warning that it can't be recovered and that forgetting it resets the addon.
@@ -387,7 +387,9 @@ Every error appears where the summary would have been, and says what happened an
 - Privacy policy covers what is sent, to whom, and what is stored locally, including that the cache is unencrypted and reveals which videos were summarized.
 - AMO: declare data collection in the manifest, submit source and reproducible build instructions, avoid remote code, and don't minify output.
 - State "not affiliated with YouTube or Google" and don't use YouTube's logo.
-- Donate link appears only in settings and the store listing. No reminders or links in the summary UI.
+- Addon ID is `@klickbait-killa`. The data-collection declaration is `websiteContent` and `authenticationInfo` (the API key is sent to the chosen provider).
+- No donation link for now: keeping the addon non-commercial avoids imprint (Impressum) obligations. If one is ever added, it appears only in settings and the store listing, with no reminders or links in the summary UI.
+- Don't advertise Gemini's free tier in the wizard, README or store listing (see section 10).
 
 ### Product rules
 
@@ -427,10 +429,10 @@ Tested on 2026-11-05 in Firefox 159 against live YouTube, logged out, with a loc
 | Caption access and feed fetch | Confirmed logged out (section 4). **Logged-in behavior not tested** |
 | Background lifetime during long streams | Confirmed with the view closed and the tab open, through a 75-second pause. Closing the tab mid-stream isn't tested end to end |
 | Unlock frame inside YouTube's page | Confirmed. A popup window is also offered |
-| Real provider APIs | Gemini confirmed with a real key. **Anthropic and OpenAI not tested with real keys:** their request and stream formats are written from provider documentation and tested against mocks |
+| Real provider APIs | Gemini confirmed with a real key. **Anthropic and OpenAI not tested with real keys:** their request and stream formats are written from provider documentation and tested against mocks. v1.0.0 labels them "experimental" in setup and settings (`experimental` in `PROVIDER_INFO`) until they're verified |
 | Page-panel fallback route | **Not tested live.** The panel request succeeded every time, so this route never ran |
 | Firefox versions | Minimum 140: built-in data consent requires it |
-| Data-collection manifest format | Confirmed: `websiteContent` under `required` |
+| Data-collection manifest format | Confirmed: `websiteContent` under `required`. `authenticationInfo` added later for the API key |
 | Models and prices | Checked 2026-11-05 against provider documentation, stored in `src/background/pricing.ts`. Gemini context limits are assumed |
 
 ## 15. Milestones
@@ -440,4 +442,4 @@ Tested on 2026-11-05 in Firefox 159 against live YouTube, logged out, with a loc
 3. **Security and setup:** vault, unlock flow, wizard, consent.
 4. **Remaining providers:** the other two, plus model table, preflight and error handling.
 5. **Feeds:** hover button, popover, job queue, background completion, cache.
-6. **Release:** accessibility and theme polish, privacy policy, store listing, donation link, manual checklist, AMO submission.
+6. **Release:** accessibility and theme polish, privacy policy, store listing, manual checklist, AMO submission.

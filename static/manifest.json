@@ -1,14 +1,14 @@
 {
   "manifest_version": 3,
   "name": "Klickbait Killa",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Decide what's worth watching on YouTube. Get a quick AI summary from a video's transcript, using your own API key.",
   "icons": { "48": "icon.svg", "96": "icon.svg" },
   "browser_specific_settings": {
     "gecko": {
-      "id": "klickbait-killa@klickbait-killa.invalid",
+      "id": "@klickbait-killa",
       "strict_min_version": "140.0",
-      "data_collection_permissions": { "required": ["websiteContent"] }
+      "data_collection_permissions": { "required": ["websiteContent", "authenticationInfo"] }
     }
   },
   "background": { "scripts": ["background.js"] },

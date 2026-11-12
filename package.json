@@ -1,6 +1,6 @@
 {
   "name": "klickbait-killa",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Firefox addon that summarizes YouTube videos from their transcripts using your own AI API key.",
   "license": "MIT",
@@ -13,6 +13,7 @@
     "lint:ext": "web-ext lint --source-dir dist",
     "start": "web-ext run --source-dir dist --start-url https://www.youtube.com",
     "package": "npm run build && web-ext build --source-dir dist --artifacts-dir artifacts --overwrite-dest",
+    "package:source": "node -e \"require('fs').mkdirSync('artifacts',{recursive:true})\" && git archive --format=zip --output=artifacts/klickbait-killa-source.zip HEAD",
     "check": "npm run typecheck && npm test && npm run build && npm run lint:ext"
   },
   "devDependencies": {
