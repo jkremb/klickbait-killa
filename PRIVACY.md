@@ -1,6 +1,6 @@
 # Klickbait Killa Privacy Policy
 
-Last updated: [date of AMO submission]
+Last updated: 12 November 2026
 Contact: open an issue at https://github.com/jkremb/klickbait-killa/issues
 
 Klickbait Killa doesn't run any servers and has no analytics, telemetry or ads. The developer never receives your data, so the developer doesn't hold or process any personal data about you.
